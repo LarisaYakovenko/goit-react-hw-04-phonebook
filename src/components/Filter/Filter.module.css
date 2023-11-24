@@ -1,0 +1,28 @@
+.label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-style: italic;
+  margin-left: 50px;
+  min-width: 100%;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+  font-size: 12px;
+}
+
+.input {
+  width: 300px;
+  border-radius: 10px;
+  border: none;
+  align-items: flex-start;
+  padding: 5px 20px;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 400;
+  color: #2f0f0f;
+  background-color: #e0f9e6;
+  box-shadow: 20px 20px 20px rgba(105, 137, 84, 0.5);
+}
