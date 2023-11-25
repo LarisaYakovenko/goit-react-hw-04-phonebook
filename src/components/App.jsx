@@ -49,7 +49,7 @@ export const App = () => {
       alert(`${data.name} is already in contacts.`);
       return;
     }
-    setContacts(prev => [...contacts, { id: nanoid(), ...data }]);
+    setContacts(prevState => [...contacts, { id: nanoid(), ...data }]);
   };
 
   return (
