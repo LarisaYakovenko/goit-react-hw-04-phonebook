@@ -13,7 +13,7 @@ const defContacs = [
 ];
 
 export const App = () => {
-  const [contacts, setContacts] = useState('contacts', defContacs);
+  const [contacts, setContacts] = useState(defContacs);
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export const App = () => {
   // }
 
   const handleChangeFilter = e => {
-    setFilter(e.currentTarget.toLocaleLowerCase().trim());
+    setFilter(e.currentTarget.value.toLocaleLowerCase().trim());
   };
 
   // handleChangeFilter = e => {
@@ -69,7 +69,7 @@ export const App = () => {
     setContacts(prevContacts => {
       return prevContacts.filter(contact => contact.id !== deleteId);
     });
-    // setFilter('');
+    setFilter('');
   };
 
   // deleteContact = deleteId => {
@@ -106,7 +106,7 @@ export const App = () => {
   //   });
   // };
 
-  const filterContacts = getFilterContacts();
+  // const filterContacts = getFilterContacts();
 
   return (
     <div className={css.container}>
@@ -115,7 +115,7 @@ export const App = () => {
       <h2>Contacts</h2>
       <Filter value={filter} onChange={handleChangeFilter} />
       <ContactList
-        filterContacts={filterContacts}
+        filterContacts={getFilterContacts()}
         onDeleteContact={deleteContact}
       />
     </div>
