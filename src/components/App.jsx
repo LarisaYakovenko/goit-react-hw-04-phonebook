@@ -13,10 +13,13 @@ const defContacs = [
 ];
 
 export const App = () => {
-  const initialContacts = JSON.parse(localStorage.getItem('contacts'));
   const [contacts, setContacts] = useState(
-    () => [...initialContacts] ?? defContacs
+    () => JSON.parse(localStorage.getItem('contacts')) ?? defContacs
   );
+
+  //   const [contacts, setContacts] = useState(
+  //     () => [...initialContacts] ?? defContacs
+  // );
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
