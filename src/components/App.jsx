@@ -17,9 +17,6 @@ export const App = () => {
     () => JSON.parse(localStorage.getItem('contacts')) ?? defContacs
   );
 
-  //   const [contacts, setContacts] = useState(
-  //     () => [...initialContacts] ?? defContacs
-  // );
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
