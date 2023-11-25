@@ -13,43 +13,20 @@ const defContacs = [
 ];
 
 export const App = () => {
-  const [contacts, setContacts] = useState(defContacs);
+  const initialContacts = JSON.parse(localStorage.getItem('contacts'));
+  const [contacts, setContacts] = useState(
+    () => [...initialContacts] ?? defContacs
+  );
   const [filter, setFilter] = useState('');
-
-  useEffect(() => {
-    const contactLS = localStorage.getItem('contacts');
-    const parsContacts = JSON.parse(contactLS);
-    if (parsContacts) {
-      setContacts(parsContacts);
-    }
-  }, []);
-
-  // componentDidMount() {
-  //   const contactLS = localStorage.getItem('contacts');
-  //   const parsContacts = JSON.parse(contactLS);
-  //   if (parsContacts) {
-  //     this.setState({ contacts: parsContacts });
-  //   }
-  // }
 
   useEffect(() => {
     contacts && localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
-  // componentDidUpdate(_, prevState) {
-  //   if (this.state.contacts !== prevState.contacts) {
-  //     localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-  //   }
-  // }
-
   const handleChangeFilter = e => {
     setFilter(e.currentTarget.value.toLocaleLowerCase().trim());
   };
 
-  // handleChangeFilter = e => {
-  //   const { name, value } = e.currentTarget;
-  //   this.setState({ [name]: value });
-  // };
   const getFilterContacts = () => {
     const normFilter = filter.toLowerCase();
     return contacts.filter(contact =>
@@ -57,26 +34,11 @@ export const App = () => {
     );
   };
 
-  // getFilterContacts = () => {
-  //   const { filter, contacts } = this.state;
-  //   const normFilter = filter.toLowerCase();
-  //   return contacts.filter(contact =>
-  //     contact.name.toLowerCase().includes(normFilter)
-  //   );
-  // };
-
   const deleteContact = deleteId => {
-    setContacts(prevContacts => {
-      return prevContacts.filter(contact => contact.id !== deleteId);
-    });
-    setFilter('');
+    setContacts(prevContacts =>
+      prevContacts.filter(contact => contact.id !== deleteId)
+    );
   };
-
-  // deleteContact = deleteId => {
-  //   this.setState(prevState => ({
-  //     contacts: prevState.contacts.filter(contact => contact.id !== deleteId),
-  //   }));
-  // };
 
   const formSubmit = data => {
     if (
@@ -87,26 +49,8 @@ export const App = () => {
       alert(`${data.name} is already in contacts.`);
       return;
     }
-    setContacts(...contacts, { id: nanoid(), ...data });
+    setContacts(prev => [...contacts, { id: nanoid(), ...data }]);
   };
-
-  // formSubmit = data => {
-  //   const { contacts } = this.state;
-
-  //   if (
-  //     contacts.some(
-  //       contact => contact.name.toLowerCase() === data.name.toLowerCase()
-  //     )
-  //   ) {
-  //     alert(`${data.name} is already in contacts.`);
-  //     return;
-  //   }
-  //   this.setState({
-  //     contacts: [...contacts, { id: nanoid(), ...data }],
-  //   });
-  // };
-
-  // const filterContacts = getFilterContacts();
 
   return (
     <div className={css.container}>
